@@ -1,0 +1,60 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.28"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "WithHeadNode",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "WithHeadNode::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-WithHeadNode-Debug-2e2adf9c8987fb7fe783.json",
+					"name" : "WithHeadNode",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/LTY/CLionProjects/DataStructure/Linear_Table/Chain_Storage/Single_Linked_List/WithHeadNode/cmake-build-debug",
+		"source" : "C:/Users/LTY/CLionProjects/DataStructure/Linear_Table/Chain_Storage/Single_Linked_List/WithHeadNode"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}
