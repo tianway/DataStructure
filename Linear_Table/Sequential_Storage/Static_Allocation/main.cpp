@@ -1,4 +1,4 @@
-//Ë³Ğò±í£¨¾²Ì¬·ÖÅä£©
+//é¡ºåºè¡¨ï¼ˆé™æ€åˆ†é…ï¼‰
 #include <stdio.h>
 #define MAXSIZE 10
 
@@ -23,11 +23,11 @@ void PrintList(SqList L) {
 
 bool InsertList(SqList &L, int i, int e) {
     if (i < 1 || i > L.length + 1) {
-        printf("²åÈëÎ»Ğò²»ºÏ·¨£¬²åÈëÊ§°Ü\n");
+        printf("æ’å…¥ä½åºä¸åˆæ³•ï¼Œæ’å…¥å¤±è´¥\n");
         return false;
     }
     if (L.length >= MAXSIZE) {
-        printf("Ë³Ğò±í¿Õ¼äÒÑÂú£¬²åÈëÊ§°Ü\n");
+        printf("é¡ºåºè¡¨ç©ºé—´å·²æ»¡ï¼Œæ’å…¥å¤±è´¥\n");
         return false;
     }
     for (int j = L.length; j >= i; j--) {
@@ -35,13 +35,13 @@ bool InsertList(SqList &L, int i, int e) {
     }
     L.data[i - 1] = e;
     L.length++;
-    printf("ÔÚÎ»ĞòÎª%dµÄÎ»ÖÃ²åÈëÖµ%d\n");
+    printf("åœ¨ä½åºä¸º%dçš„ä½ç½®æ’å…¥å€¼%d\n");
     return true;
 }
 
 bool DeleteList(SqList &L, int i, int &e) {
     if (i < 1 || i > L.length) {
-        printf("É¾³ıÎ»Ğò²»ºÏ·¨£¬É¾³ıÊ§°Ü\n");
+        printf("åˆ é™¤ä½åºä¸åˆæ³•ï¼Œåˆ é™¤å¤±è´¥\n");
         return false;
     }
     e = L.data[i - 1];
@@ -49,13 +49,13 @@ bool DeleteList(SqList &L, int i, int &e) {
         L.data[j - 1] = L.data[j];
     }
     L.length--;
-    printf("É¾³ıÎ»ĞòÎª%dµÄÖµ%d\n", i, e);
+    printf("åˆ é™¤ä½åºä¸º%dçš„å€¼%d\n", i, e);
     return true;
 }
 
 int GetElem(SqList L, int i) {
     if (i < 1 || i > L.length) {
-        printf("Î»Ğò²»ºÏ·¨\n");
+        printf("ä½åºä¸åˆæ³•\n");
         return -1;
     }
     return L.data[i - 1];
@@ -64,10 +64,10 @@ int GetElem(SqList L, int i) {
 int LocateElem(SqList L, int e) {
     for (int i = 0; i < L.length; i++) {
         if (L.data[i] == e) {
-            return i + 1; //·µ»ØÖµ¶ÔÓ¦Î»Ğò
+            return i + 1; //è¿”å›å€¼å¯¹åº”ä½åº
         }
     }
-    printf("Î´ÕÒµ½ÔªËØ%d\n", e);
+    printf("æœªæ‰¾åˆ°å…ƒç´ %d\n", e);
     return -1;
 }
 
@@ -81,7 +81,7 @@ int main() {
     PrintList(L);
     DeleteList(L, 3, e);
     PrintList(L);
-    printf("Î»ĞòÎª3µÄÖµÎª%d\n", GetElem(L, 3));
-    printf("ÖµÎª2µÄÎ»ĞòÎª%d\n", LocateElem(L, 2));
+    printf("ä½åºä¸º3çš„å€¼ä¸º%d\n", GetElem(L, 3));
+    printf("å€¼ä¸º2çš„ä½åºä¸º%d\n", LocateElem(L, 2));
     return 0;
 }
