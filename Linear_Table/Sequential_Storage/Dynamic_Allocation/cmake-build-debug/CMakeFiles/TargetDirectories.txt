@@ -1,3 +1,3 @@
-C:/Users/LTY/CLionProjects/Data_Structure/Linear_Table/Sequential_Storage/Dynamic_Allocation/cmake-build-debug/CMakeFiles/Dynamic_Allocation.dir
-C:/Users/LTY/CLionProjects/Data_Structure/Linear_Table/Sequential_Storage/Dynamic_Allocation/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/LTY/CLionProjects/Data_Structure/Linear_Table/Sequential_Storage/Dynamic_Allocation/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/LTY/CLionProjects/DataStructure/Linear_Table/Sequential_Storage/Dynamic_Allocation/cmake-build-debug/CMakeFiles/Dynamic_Allocation.dir
+C:/Users/LTY/CLionProjects/DataStructure/Linear_Table/Sequential_Storage/Dynamic_Allocation/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/LTY/CLionProjects/DataStructure/Linear_Table/Sequential_Storage/Dynamic_Allocation/cmake-build-debug/CMakeFiles/rebuild_cache.dir

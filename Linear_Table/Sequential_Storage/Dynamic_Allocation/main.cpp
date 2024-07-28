@@ -1,4 +1,4 @@
-//Ë³Ğò±í£¨¶¯Ì¬·ÖÅä£©
+//é¡ºåºè¡¨ï¼ˆåŠ¨æ€åˆ†é…ï¼‰
 #include <stdio.h>
 #include <stdlib.h>
 #define InitSize 100
@@ -24,11 +24,11 @@ void PrintList(Seqlist L) {
 
 bool InsertList(Seqlist &L, int i, int e) {
     if (i < 1 || i > L.length + 1) {
-        printf("²åÈëÎ»Ğò²»ºÏ·¨£¬²åÈëÊ§°Ü\n");
+        printf("æ’å…¥ä½åºä¸åˆæ³•ï¼Œæ’å…¥å¤±è´¥\n");
         return false;
     }
     if (L.length >= L.MaxSize) {
-        printf("Ë³Ğò±í¿Õ¼äÒÑÂú£¬²åÈëÊ§°Ü\n");
+        printf("é¡ºåºè¡¨ç©ºé—´å·²æ»¡ï¼Œæ’å…¥å¤±è´¥\n");
         return false;
     }
     for (int j = L.length; j >= i; j--) {
@@ -36,13 +36,13 @@ bool InsertList(Seqlist &L, int i, int e) {
     }
     L.data[i - 1] = e;
     L.length++;
-    printf("ÔÚÎ»ĞòÎª%dµÄÎ»ÖÃ²åÈëÖµ%d\n");
+    printf("åœ¨ä½åºä¸º%dçš„ä½ç½®æ’å…¥å€¼%d\n");
     return true;
 }
 
 bool DeleteList(Seqlist &L, int i, int &e) {
     if (i < 1 || i > L.length) {
-        printf("É¾³ıÎ»Ğò²»ºÏ·¨£¬É¾³ıÊ§°Ü\n");
+        printf("åˆ é™¤ä½åºä¸åˆæ³•ï¼Œåˆ é™¤å¤±è´¥\n");
         return false;
     }
     e = L.data[i - 1];
@@ -50,13 +50,13 @@ bool DeleteList(Seqlist &L, int i, int &e) {
         L.data[j - 1] = L.data[j];
     }
     L.length--;
-    printf("É¾³ıÎ»ĞòÎª%dµÄÖµ%d\n", i, e);
+    printf("åˆ é™¤ä½åºä¸º%dçš„å€¼%d\n", i, e);
     return true;
 }
 
 int GetElem(Seqlist L, int i) {
     if (i < 1 || i > L.length) {
-        printf("Î»Ğò²»ºÏ·¨\n");
+        printf("ä½åºä¸åˆæ³•\n");
         return -1;
     }
     return L.data[i - 1];
@@ -65,10 +65,10 @@ int GetElem(Seqlist L, int i) {
 int LocateElem(Seqlist L, int e) {
     for (int i = 0; i < L.length; i++) {
         if (L.data[i] == e) {
-            return i + 1; //·µ»ØÖµ¶ÔÓ¦Î»Ğò
+            return i + 1; //è¿”å›å€¼å¯¹åº”ä½åº
         }
     }
-    printf("Î´ÕÒµ½ÔªËØ%d\n", e);
+    printf("æœªæ‰¾åˆ°å…ƒç´ %d\n", e);
     return -1;
 }
 
@@ -80,7 +80,7 @@ void ExpandList(Seqlist &L, int len) {
     }
     free(p);
     L.MaxSize += len;
-    printf("À©Èİ³É¹¦\n");
+    printf("æ‰©å®¹æˆåŠŸ\n");
 }
 
 void DestroyList(Seqlist &L) {
@@ -99,8 +99,8 @@ int main() {
     int e;
     DeleteList(L, 3, e);
     PrintList(L);
-    printf("Î»ĞòÎª%dµÄÖµÎª%d\n", 3, GetElem(L, 3));
-    printf("ÖµÎª%dµÄÔªËØÎ»ĞòÎª%d\n", 3, LocateElem(L, 3));
+    printf("ä½åºä¸º%dçš„å€¼ä¸º%d\n", 3, GetElem(L, 3));
+    printf("å€¼ä¸º%dçš„å…ƒç´ ä½åºä¸º%d\n", 3, LocateElem(L, 3));
     ExpandList(L, 10);
     DestroyList(L);
     return 0;
