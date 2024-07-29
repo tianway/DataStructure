@@ -12,6 +12,20 @@ bool InitList(LinkList &L) {
     return true;
 }
 
+bool IsEmpty(LinkList L) {
+    return L == NULL;
+}
+
+bool DestroyList(LinkList &L) {
+    LNode *p = L;
+    while (p != NULL) {
+        L = L->next;
+        free(p);
+        p = L;
+    }
+    return true;
+}
+
 int length(LinkList L) {
     int length = 0;
     LNode *p = L;
@@ -54,7 +68,7 @@ bool InsertNextNode(LNode *&p, int e) {
     return true;
 }
 
-bool InsertLastNode(LNode *&p, int e) {
+bool InsertPriorNode(LNode *&p, int e) {
     if (p == NULL) {
         return false;
     }
@@ -82,13 +96,13 @@ bool InsertList(LinkList &L, int i, int e) {
     return InsertNextNode(p, e);
 }
 
-bool InsertList_Last(LinkList &L, int i, int e) {
+bool InsertList_Prior(LinkList &L, int i, int e) {
     if (i < 1) {
         printf("插入位置不合法！\n");
         return false;
     }
     LNode *p = GetElem(L, i);
-    return InsertLastNode(p, e);
+    return InsertPriorNode(p, e);
 }
 
 bool DeleteNextNode(LNode *&p, int &e) {
@@ -188,7 +202,7 @@ int main() {
     // InsertList(L, 1, 1);
     // InsertList(L, 2, 2);
     // InsertList(L, 3, 3);
-    // InsertList_Last(L, 3, 4);
+    // InsertList_Prior(L, 3, 4);
     // PrintList(L);
     // DeleteList(L, 3, e);
     // DeleteList_Next(L, 2, e);
@@ -200,5 +214,6 @@ int main() {
     List_TailInsert(L);
     PrintList(L);
 
+    DestroyList(L);
     return 0;
 }
