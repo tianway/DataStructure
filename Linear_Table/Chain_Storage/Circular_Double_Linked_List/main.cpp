@@ -1,4 +1,4 @@
-//双链表（带头结点）
+//循环双链表（带头结点）
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -12,17 +12,17 @@ bool InitDLinkList(DLinkList &L) {
     if (L == NULL) {
         return false;
     }
-    L->next = NULL;
-    L->prior = NULL;
+    L->next = L;
+    L->prior = L;
     return true;
 }
 
 bool IsEmpty(DLinkList L) {
-    return L->next == NULL;
+    return L->next == L;
 }
 
 bool DestroyList(DLinkList &L) {
-    while (L->next != NULL) {
+    while (L->next != L) {
         DNode *p = L->next;
         L->next = p->next;
         free(p);
@@ -41,6 +41,9 @@ DNode *GetElem(DLinkList L, int i) {
     while (p != NULL && j < i) {
         p = p->next;
         j++;
+        if (p == L) {
+            return NULL;
+        }
     }
     return p;
 }
@@ -55,16 +58,14 @@ bool InsertNextNode(DNode *p, int e) {
     }
     s->data = e;
     s->next = p->next;
-    if (p->next != NULL) {
-        p->next->prior = s;
-    }
+    p->next->prior = s;
     p->next = s;
     s->prior = p;
     return true;
 }
 
 bool InsertPriorNode(DNode *p, int e) {
-    if (p == NULL || p->prior == NULL) {
+    if (p == NULL) {
         return false;
     }
     DNode *s = (DNode *) malloc(sizeof(DNode));
@@ -90,29 +91,25 @@ bool ListInsert_Prior(DLinkList &L, int i, int e) {
 }
 
 bool DeleteNextNode(DNode *p, int &e) {
-    if (p == NULL || p->next == NULL) {
+    if (p == NULL) {
         return false;
     }
     DNode *q = p->next;
     e = q->data;
     p->next = q->next;
-    if (q->next != NULL) {
-        q->next->prior = p;
-    }
+    q->next->prior = p;
     free(q);
     return true;
 }
 
 bool DeletePriorNode(DNode *p, int &e) {
-    if (p == NULL || p->prior == NULL || p->prior->prior == NULL) {
+    if (p == NULL) {
         return false;
     }
     DNode *q = p->prior;
     e = q->data;
     p->prior = q->prior;
-    if (q->prior != NULL) {
-        q->prior->next = p;
-    }
+    q->prior->next = p;
     free(q);
     return true;
 }
@@ -131,8 +128,8 @@ bool ListDelete_Prior(DLinkList &L, int i, int &e) {
         printf("删除的位置不合法！\n");
         return false;
     }
-    DNode *p = GetElem(L, i + 1);
-    return DeletePriorNode(p, e);
+    DNode *p = GetElem(L, i);
+    return DeletePriorNode(p->next, e);
 }
 
 DLinkList ListCreate_HeadInsert(DLinkList &L) {
@@ -161,7 +158,7 @@ DLinkList ListCreate_TailInsert(DLinkList &L) {
 
 void PrintList(DLinkList L) {
     DNode *p = L->next;
-    while (p != NULL) {
+    while (p != NULL && p != L) {
         printf("%d ", p->data);
         p = p->next;
     }
