@@ -21,6 +21,10 @@ bool IsEmpty(DLinkList L) {
     return L->next == L;
 }
 
+bool IsTail(DLinkList L, DNode *p) {
+    return p->next == L;
+}
+
 bool DestroyList(DLinkList &L) {
     while (L->next != L) {
         DNode *p = L->next;
@@ -32,24 +36,54 @@ bool DestroyList(DLinkList &L) {
     return true;
 }
 
-DNode *GetElem(DLinkList L, int i) {
-    if (i < 0) {
-        return NULL;
+DNode *LocateElem(DLinkList L, int e) {
+    DNode *p = L->next;
+    while (p != L && p->data != e) {
+        L = L->next;
     }
-    DNode *p = L;
-    int j = 0;
-    while (p != NULL && j < i) {
-        p = p->next;
-        j++;
-        if (p == L) {
-            return NULL;
-        }
+    if (p == L) {
+        printf("未找到元素！\n");
+        return NULL;
     }
     return p;
 }
 
+/**
+ * 从循环双链表中获取第i个元素。
+ *
+ * @param L 链表的头指针。
+ * @param i 想要获取的元素的索引。
+ * @return 返回第i个元素的指针，如果索引不合法则返回NULL。
+ *
+ * 此函数首先检查索引i是否合法，即是否小于0。
+ * 然后从链表的头开始遍历，直到找到第i个元素或者遍历回到链表头。
+ * 如果遍历回到链表头仍未找到第i个元素，则说明索引超过链表长度，返回NULL。
+ */
+DNode *GetElem(DLinkList L, int i) {
+    // 检查索引i是否小于0
+    if (i < 0) {
+        printf("查找位序不合法！\n");
+        return NULL;
+    }
+    // 从链表头开始遍历
+    DNode *p = L;
+    int j = 0;
+    // 遍历链表直到找到第i个元素或者遍历回到链表头
+    while (p != NULL && j < i) {
+        p = p->next;
+        j++;
+        // 如果遍历回到链表头仍未找到第i个元素，则说明索引超过链表长度
+        if (p == L) {
+            printf("查找位序超过链表长度，元素不存在！\n");
+            return NULL;
+        }
+    }
+    // 返回第i个元素的指针
+    return p;
+}
+
 bool InsertNextNode(DNode *p, int e) {
-    if (p == NULL) {
+    if (p == NULL || p->next == NULL) {
         return false;
     }
     DNode *s = (DNode *) malloc(sizeof(DNode));
@@ -65,7 +99,7 @@ bool InsertNextNode(DNode *p, int e) {
 }
 
 bool InsertPriorNode(DNode *p, int e) {
-    if (p == NULL) {
+    if (p == NULL || p->prior == NULL) {
         return false;
     }
     DNode *s = (DNode *) malloc(sizeof(DNode));
@@ -81,17 +115,25 @@ bool InsertPriorNode(DNode *p, int e) {
 }
 
 bool ListInsert(DLinkList &L, int i, int e) {
+    if (i < 1) {
+        printf("插入的位置不合法！\n");
+        return false;
+    }
     DNode *p = GetElem(L, i - 1);
     return InsertNextNode(p, e);
 }
 
 bool ListInsert_Prior(DLinkList &L, int i, int e) {
+    if (i < 0) {
+        printf("插入的位置不合法！\n");
+        return false;
+    }
     DNode *p = GetElem(L, i);
     return InsertPriorNode(p, e);
 }
 
 bool DeleteNextNode(DNode *p, int &e) {
-    if (p == NULL) {
+    if (p == NULL || p->next == NULL) {
         return false;
     }
     DNode *q = p->next;
@@ -103,7 +145,7 @@ bool DeleteNextNode(DNode *p, int &e) {
 }
 
 bool DeletePriorNode(DNode *p, int &e) {
-    if (p == NULL) {
+    if (p == NULL || p->prior == NULL) {
         return false;
     }
     DNode *q = p->prior;
@@ -158,7 +200,7 @@ DLinkList ListCreate_TailInsert(DLinkList &L) {
 
 void PrintList(DLinkList L) {
     DNode *p = L->next;
-    while (p != NULL && p != L) {
+    while (p != L) {
         printf("%d ", p->data);
         p = p->next;
     }

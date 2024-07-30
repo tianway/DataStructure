@@ -51,6 +51,7 @@ LNode *LocateElem(LinkList L, int e) {
 
 LNode *GetElem(LinkList L, int i) {
     if (i < 0) {
+        printf("查找位序不合法！\n");
         return NULL;
     }
     LNode *p = L;

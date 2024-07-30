@@ -32,8 +32,17 @@ bool DestroyList(DLinkList &L) {
     return true;
 }
 
+DNode *LocateElem(DLinkList L, int e) {
+    DNode *p = L->next;
+    while (p != NULL && p->data != e) {
+        p = p->next;
+    }
+    return p;
+}
+
 DNode *GetElem(DLinkList L, int i) {
     if (i < 0) {
+        printf("查找位序不合法！\n");
         return NULL;
     }
     DNode *p = L;
