@@ -1,5 +1,6 @@
 //顺序表（静态分配）
 #include <stdio.h>
+
 #define MAXSIZE 10
 
 typedef struct SqList {
@@ -7,11 +8,17 @@ typedef struct SqList {
     int length;
 } Sqlist;
 
-void InitList(SqList &L) {
+bool InitList(SqList &L) {
     for (int i = 0; i < MAXSIZE; i++) {
         L.data[i] = 0;
     }
     L.length = 0;
+    return true;
+}
+
+bool DestroyList(SqList &L) {
+    L.length = 0;
+    return true;
 }
 
 void PrintList(SqList L) {
@@ -73,8 +80,8 @@ int LocateElem(SqList L, int e) {
 
 int main() {
     SqList L;
-    int e = -1;
     InitList(L);
+    int e;
     for (int i = 0; i < 5; i++) {
         InsertList(L, i + 1, i + 1);
     }

@@ -26,7 +26,7 @@ bool IsTail(DLinkList L, DNode *p) {
 }
 
 bool DestroyList(DLinkList &L) {
-    while (L->next != L) {
+    while (L->next != NULL && L->next != L) {
         DNode *p = L->next;
         L->next = p->next;
         free(p);
@@ -34,6 +34,16 @@ bool DestroyList(DLinkList &L) {
     free(L);
     L = NULL;
     return true;
+}
+
+int Length(DLinkList L) {
+    int length = 0;
+    DNode *p = L->next;
+    while (p != NULL && p != L) {
+        length++;
+        p = p->next;
+    }
+    return length;
 }
 
 DNode *LocateElem(DLinkList L, int e) {

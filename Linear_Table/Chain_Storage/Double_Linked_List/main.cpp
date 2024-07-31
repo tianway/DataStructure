@@ -32,6 +32,19 @@ bool DestroyList(DLinkList &L) {
     return true;
 }
 
+int Length(DLinkList L) {
+    if (L->next == NULL) {
+        return 0;
+    }
+    int length = 0;
+    DNode *p = L->next;
+    while (p != NULL) {
+        length++;
+        p = p->next;
+    }
+    return length;
+}
+
 DNode *LocateElem(DLinkList L, int e) {
     DNode *p = L->next;
     while (p != NULL && p->data != e) {

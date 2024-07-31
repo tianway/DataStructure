@@ -1,6 +1,7 @@
 //顺序表（动态分配）
 #include <stdio.h>
 #include <stdlib.h>
+
 #define InitSize 100
 
 typedef struct Seqlist {
@@ -9,10 +10,14 @@ typedef struct Seqlist {
     int MaxSize;
 } Seqlist;
 
-void InitList(Seqlist &L) {
+bool InitList(Seqlist &L) {
     L.data = (int *) malloc(InitSize * sizeof(int));
+    if (L.data == NULL) {
+        return false;
+    }
     L.length = 0;
     L.MaxSize = InitSize;
+    return true;
 }
 
 void PrintList(Seqlist L) {
@@ -72,21 +77,25 @@ int LocateElem(Seqlist L, int e) {
     return -1;
 }
 
-void ExpandList(Seqlist &L, int len) {
+bool ExpandList(Seqlist &L, int len) {
     int *p = L.data;
     L.data = (int *) malloc((L.MaxSize + len) * sizeof(int));
+    if (L.data == NULL) {
+        return false;
+    }
     for (int i = 0; i < L.length; i++) {
         L.data[i] = p[i];
     }
     free(p);
     L.MaxSize += len;
-    printf("扩容成功\n");
+    return true;
 }
 
-void DestroyList(Seqlist &L) {
+bool DestroyList(Seqlist &L) {
     free(L.data);
     L.length = 0;
     L.MaxSize = 0;
+    return true;
 }
 
 int main() {

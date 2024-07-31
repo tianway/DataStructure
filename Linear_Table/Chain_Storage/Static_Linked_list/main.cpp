@@ -8,11 +8,25 @@ typedef struct Node {
     int next;
 } SLinkList[MAXSIZE];
 
-void InitList(SLinkList L) {
+bool InitList(SLinkList L) {
     L->next = -1;
     for (int i = 1; i <= MAXSIZE - 1; ++i) {
         L[i].next = -2;
     }
+    return true;
+}
+
+int Length(SLinkList L) {
+    if (L->next == -1) {
+        return 0;
+    }
+    int cursor = L->next;
+    int count = 0;
+    while (cursor != -1) {
+        cursor = L[cursor].next;
+        count++;
+    }
+    return count;
 }
 
 Node *LocateElem(SLinkList L, int e) {
