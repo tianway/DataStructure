@@ -55,5 +55,15 @@ int Index(SString S, SString T) {
 }
 
 int main() {
+    SString S, T;
+    S.ch[1] = 'w';
+    S.ch[2] = 'o';
+    S.ch[3] = 'r';
+    S.ch[4] = 'd';
+    S.length = 4;
+    T.ch[1] = 'o';
+    T.ch[2] = 'r';
+    T.length = 2;
+    printf("%d", Index(S, T));
     return 0;
 }
