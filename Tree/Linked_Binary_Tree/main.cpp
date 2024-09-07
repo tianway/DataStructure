@@ -11,10 +11,102 @@ typedef struct BiTNode {
     struct BiTNode *lchild, *rchild;
 } BiTNode, *BiTree;
 
+struct LinkNode {
+    BiTNode *data;
+    struct LinkNode *next;
+};
+
+typedef struct LinkQueue {
+    LinkNode *front, *rear;
+} LinkQueue;
+
+void InitQueue(LinkQueue &Q) {
+    Q.front = Q.rear = (LinkNode *) malloc(sizeof(LinkNode));
+    Q.front->next = NULL;
+}
+
+bool IsEmpty(LinkQueue Q) {
+    return Q.front == Q.rear;
+}
+
+bool EnQueue(LinkQueue &Q, BiTNode *e) {
+    LinkNode *s = (LinkNode *) malloc(sizeof(LinkNode));
+    s->data = e;
+    s->next = NULL;
+    Q.rear->next = s;
+    Q.rear = s;
+    return true;
+}
+
+bool DeQueue(LinkQueue &Q, BiTNode *&e) {
+    if (Q.front == Q.rear)
+        return false;
+    LinkNode *s = Q.front->next;
+    e = s->data;
+    Q.front->next = s->next;
+    if (Q.rear == s)
+        Q.rear = Q.front;
+    free(s);
+    return true;
+}
+
 void init_bi_tree(BiTree &t) {
     t = (BiTree) malloc(sizeof(BiTNode));
     t->data.value = 1;
     t->lchild = t->rchild = NULL;
+}
+
+void visit(BiTNode *p) {
+    printf("%d ", p->data.value);
+}
+
+void preorder(BiTree t) {
+    if (t != NULL) {
+        visit(t);
+        preorder(t->lchild);
+        preorder(t->rchild);
+    }
+}
+
+void inorder(BiTree t) {
+    if (t != NULL) {
+        inorder(t->lchild);
+        visit(t);
+        inorder(t->rchild);
+    }
+}
+
+void postorder(BiTree t) {
+    if (t != NULL) {
+        postorder(t->lchild);
+        postorder(t->rchild);
+        visit(t);
+    }
+}
+
+int treeDepth(BiTree t) {
+    if (t == NULL)
+        return 0;
+    else {
+        int l = treeDepth(t->lchild);
+        int r = treeDepth(t->rchild);
+        return (l > r ? l : r) + 1;
+    }
+}
+
+void levelorder(BiTree t) {
+    LinkQueue Q;
+    BiTree p;
+    InitQueue(Q);
+    EnQueue(Q, t);
+    while (!IsEmpty(Q)) {
+        DeQueue(Q, p);
+        visit(p);
+        if (p->lchild != NULL)
+            EnQueue(Q, p->lchild);
+        if (p->rchild != NULL)
+            EnQueue(Q, p->rchild);
+    }
 }
 
 int main() {
