@@ -55,9 +55,10 @@ void init_bi_tree(BiTree &t) {
     t->data.value = 1;
     t->lchild = t->rchild = NULL;
 }
-BiTNode *q;
-BiTNode *pre = NULL;
-BiTNode *final = NULL;
+
+BiTNode *q; //目标节点
+BiTNode *pre = NULL; //前驱节点
+BiTNode *final = NULL; //最终结果
 
 void visit(BiTNode *p) {
     if (p == q)
