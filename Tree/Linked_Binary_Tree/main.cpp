@@ -55,9 +55,15 @@ void init_bi_tree(BiTree &t) {
     t->data.value = 1;
     t->lchild = t->rchild = NULL;
 }
+BiTNode *q;
+BiTNode *pre = NULL;
+BiTNode *final = NULL;
 
 void visit(BiTNode *p) {
-    printf("%d ", p->data.value);
+    if (p == q)
+        final = pre;
+    else
+        pre = p;
 }
 
 void preorder(BiTree t) {
